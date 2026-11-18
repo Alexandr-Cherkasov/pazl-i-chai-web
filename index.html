@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f7f3e9">
+  <meta name="theme-color" content="#f3e3c7">
   <meta name="description" content="Превратите любимую фотографию в пазл и сохраните собранную картинку в свою библиотеку.">
   <title>PuzzleMood — уютные пазлы онлайн</title>
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css">
-  <script type="module" src="./src/app.js"></script>
+  <link rel="stylesheet" href="./style.css?v=workshop">
+  <script type="module" src="./src/app.js?v=workshop"></script>
 </head>
 <body>
   <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -28,7 +28,6 @@
     <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
     <symbol id="i-sound" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5Zm4 4a4 4 0 0 1 0 6m3-9a8 8 0 0 1 0 12"/></symbol>
     <symbol id="i-muted" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5Zm5 4 5 6m0-6-5 6"/></symbol>
-    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2c.5 7 2.5 9 10 10-7.5 1-9.5 3-10 10C11.5 15 9.5 13 2 12c7.5-1 9.5-3 10-10Z"/></symbol>
   </svg>
   <header class="site-header">
     <div class="wrap header-inner">
@@ -47,25 +46,17 @@
     <section id="create-view" aria-labelledby="hero-title">
       <div class="hero">
         <div class="hero-copy">
-          <div class="hero-note"><svg class="icon"><use href="#i-coffee"/></svg> Уютные пазлы онлайн</div>
-          <h1 id="hero-title" tabindex="-1">Собери картинку <span>по кусочкам<span class="hero-period">.</span></span></h1>
+          <div class="hero-note"><svg class="icon"><use href="#i-puzzle"/></svg> Мастерская пазлов</div>
+          <h1 id="hero-title" tabindex="-1">Собери картинку <span>по кусочкам.</span></h1>
           <p>Любимая фотография, четыре уровня сложности и немного времени для себя.</p>
           <div class="hero-actions">
             <button id="hero-upload" class="button primary" type="button"><svg class="icon"><use href="#i-upload"/></svg>Загрузить фото</button>
-            <a id="sample-link" class="button quiet" href="#setup">Попробовать пример <svg class="icon"><use href="#i-chevron"/></svg></a>
+            <a id="sample-link" class="button secondary" href="#setup"><svg class="icon"><use href="#i-play"/></svg>Попробовать пример</a>
           </div>
         </div>
-        <figure class="postcard">
-          <div class="postcard-paper">
-            <div class="postcard-art">
-              <img src="./assets/lake-cottage.jpg" width="1536" height="1024" alt="Рисованный домик у озера среди елей и гор">
-              <canvas id="postcard-puzzle" aria-hidden="true" hidden></canvas>
-            </div>
-            <figcaption>Домик у озера <svg class="icon"><use href="#i-puzzle"/></svg></figcaption>
-          </div>
-          <span class="tape" aria-hidden="true"></span>
-          <svg class="icon postcard-star" aria-hidden="true"><use href="#i-spark"/></svg>
-          <svg class="icon postcard-twinkle" aria-hidden="true"><use href="#i-spark"/></svg>
+        <figure class="workshop-scene">
+          <img src="./assets/puzzle-workshop.jpg" width="1536" height="1024" fetchpriority="high"
+            alt="Рисованная мастерская с коробками пазлов, арочным окном и деталями на деревянной стойке">
         </figure>
       </div>
 

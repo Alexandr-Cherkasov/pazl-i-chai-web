@@ -1,10 +1,9 @@
-import { PuzzleBoard, paintPostcard } from './board.js';
+import { PuzzleBoard } from './board.js?v=workshop';
 import { loadImage, prepareImage, sample } from './images.js';
 import { levels, shuffled } from './puzzle.js';
 import { finishGame, getActive, getCompleted, saveActive } from './storage.js';
 
 const $ = (id) => document.getElementById(id);
-const sampleImage = document.querySelector('.postcard-art img');
 const fileLimit = 20 * 1024 * 1024;
 const uploadTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/avif', 'image/gif'];
 const libraryDate = new Intl.DateTimeFormat('ru-RU', { dateStyle: 'medium' });
@@ -392,5 +391,4 @@ $('preview-dialog').addEventListener('close', () => {
   $('preview-photo').removeAttribute('src');
 });
 window.addEventListener('hashchange', route);
-sampleImage.decode().then(() => paintPostcard($('postcard-puzzle'), sampleImage)).catch(() => {});
 route();

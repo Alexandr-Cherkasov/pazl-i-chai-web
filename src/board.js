@@ -27,10 +27,10 @@ function paintPiece(context, image, piece, path, x, y, scale, stroke, shadow = f
   context.translate(x, y);
   context.scale(scale, scale);
   if (shadow) {
-    context.shadowColor = '#25382c70';
+    context.shadowColor = '#38211e70';
     context.shadowBlur = 6;
     context.shadowOffsetY = 2;
-    context.fillStyle = '#f3efe2';
+    context.fillStyle = '#f8e8c9';
     context.fill(path);
     context.shadowColor = 'transparent';
   }
@@ -42,31 +42,6 @@ function paintPiece(context, image, piece, path, x, y, scale, stroke, shadow = f
   context.strokeStyle = stroke;
   context.stroke(path);
   context.restore();
-}
-
-export function paintPostcard(canvas, image) {
-  const puzzle = createPuzzle(image.naturalWidth, image.naturalHeight, 'easy', 39);
-  if (puzzle.cols !== 4 || puzzle.rows !== 3) return;
-  const width = 840;
-  const scale = width / puzzle.width;
-  const height = puzzle.height * scale;
-  const context = fitCanvas(canvas, width, height);
-  context.fillStyle = '#d7ddc7';
-  context.fillRect(0, 0, width, height);
-  const lifted = puzzle.pieces[3];
-  for (const piece of puzzle.pieces) {
-    const path = piecePath(puzzle, piece);
-    if (piece === lifted) continue;
-    paintPiece(context, image, piece, path, piece.x * scale, piece.y * scale, scale, '#25382c65');
-  }
-  context.save();
-  context.translate(width * .835, height * .24);
-  context.rotate(.12);
-  const x = -puzzle.cellWidth * scale / 2;
-  const y = -puzzle.cellHeight * scale / 2;
-  paintPiece(context, image, lifted, piecePath(puzzle, lifted), x, y, scale, '#2d493b90', true);
-  context.restore();
-  canvas.hidden = false;
 }
 
 export class PuzzleBoard {
@@ -260,10 +235,10 @@ export class PuzzleBoard {
     const w = imageWidth * scale;
     const h = imageHeight * scale;
     context.save();
-    context.shadowColor = '#39453730';
+    context.shadowColor = '#472a233b';
     context.shadowBlur = 14;
     context.shadowOffsetY = 3;
-    context.fillStyle = '#faf7ec';
+    context.fillStyle = '#fff1d9';
     context.fillRect(x, y, w, h);
     context.restore();
     if (this.guide) {
@@ -271,11 +246,11 @@ export class PuzzleBoard {
       context.drawImage(this.image, x, y, w, h);
       context.globalAlpha = 1;
     }
-    context.strokeStyle = '#858f806e';
+    context.strokeStyle = '#8c5c4b9c';
     context.lineWidth = 1;
     context.strokeRect(x, y, w, h);
     context.lineWidth = .7;
-    context.strokeStyle = '#8c958660';
+    context.strokeStyle = '#a6785d84';
     context.beginPath();
     context.setLineDash([2, 4]);
     for (let col = 1; col < cols; col += 1) {
@@ -292,7 +267,7 @@ export class PuzzleBoard {
     context.setLineDash([]);
     for (const id of this.placed) {
       const piece = this.puzzle.pieces[id];
-      paintPiece(context, this.image, piece, this.paths[id], x + piece.x * scale, y + piece.y * scale, scale, '#32473b65', false, .75);
+      paintPiece(context, this.image, piece, this.paths[id], x + piece.x * scale, y + piece.y * scale, scale, '#4f302a7d', false, .75);
     }
     const pad = this.desk.inset * scale + 9;
     for (const [id, position] of this.positions) {
@@ -301,12 +276,12 @@ export class PuzzleBoard {
       const top = y + position.y * scale;
       if (left - pad > width || left + cellWidth * scale + pad < 0 || top - pad > height || top + cellHeight * scale + pad < 0) continue;
       const selected = id === this.selected;
-      paintPiece(context, this.image, this.puzzle.pieces[id], this.paths[id], left, top, scale, selected ? '#254f37' : '#273e3299', true, selected ? 2 : .9);
+      paintPiece(context, this.image, this.puzzle.pieces[id], this.paths[id], left, top, scale, selected ? '#6b4a33' : '#4f302abd', true, selected ? 2 : .9);
     }
     if (this.keyboardCell !== null) {
       const cell = this.puzzle.pieces[this.keyboardCell];
       context.lineWidth = 2;
-      context.strokeStyle = '#365c4a';
+      context.strokeStyle = '#7f4037';
       context.strokeRect(x + cell.x * scale + 1, y + cell.y * scale + 1, cellWidth * scale - 2, cellHeight * scale - 2);
     }
   }
@@ -469,7 +444,7 @@ export class PuzzleBoard {
       dragLayer.style.width = width + 'px';
       dragLayer.style.height = height + 'px';
       const context = fitCanvas(dragLayer, width, height);
-      paintPiece(context, this.image, this.puzzle.pieces[pointer.id], this.paths[pointer.id], padding, padding, scale, '#32473bc0', true);
+      paintPiece(context, this.image, this.puzzle.pieces[pointer.id], this.paths[pointer.id], padding, padding, scale, '#4f302ae0', true);
       dragLayer.hidden = false;
     }
     const left = event.clientX - pointer.offset.x * scale - padding;
