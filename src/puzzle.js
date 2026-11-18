@@ -20,7 +20,7 @@ function gridFor(count, aspect) {
   return grid;
 }
 
-function seededRandom(initialSeed) {
+export function seededRandom(initialSeed) {
   let seed = initialSeed >>> 0;
   return () => {
     seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
@@ -84,10 +84,10 @@ export function targetFor(puzzle, piece, x, y) {
     && Math.abs(piece.y - y) <= puzzle.cellHeight * 0.27;
 }
 
-export function shuffled(values) {
+export function shuffled(values, random = Math.random) {
   const order = [...values];
   for (let i = order.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(random() * (i + 1));
     [order[i], order[j]] = [order[j], order[i]];
   }
   return order;

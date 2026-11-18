@@ -24,6 +24,10 @@
     <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
     <symbol id="i-edges" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v4H4m11-4v4h5m0 8h-5v4m-6 0v-4H4"/></symbol>
     <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M3 6h2c5 0 9 12 14 12h2m-4-4 4 4-4 4m4-16h-2c-2 0-4 2-5 4M3 18h2c2 0 4-2 5-4m7-12 4 4-4 4"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5Zm4 4a4 4 0 0 1 0 6m3-9a8 8 0 0 1 0 12"/></symbol>
+    <symbol id="i-muted" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5Zm5 4 5 6m0-6-5 6"/></symbol>
     <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2c.5 7 2.5 9 10 10-7.5 1-9.5 3-10 10C11.5 15 9.5 13 2 12c7.5-1 9.5-3 10-10Z"/></symbol>
   </svg>
   <header class="site-header">
@@ -121,12 +125,22 @@
       </div>
       <div class="game-room">
         <div class="game-toolbar" aria-label="Инструменты сборки">
-          <button id="toggle-guide" class="button secondary tool-button" type="button" aria-pressed="false"><svg class="icon"><use href="#i-image"/></svg>Образец</button>
-          <button id="toggle-edges" class="button secondary tool-button" type="button" aria-pressed="false"><svg class="icon"><use href="#i-edges"/></svg>Только края</button>
-          <button id="shuffle" class="button secondary tool-button" type="button"><svg class="icon"><use href="#i-shuffle"/></svg>Перемешать</button>
+          <div class="game-tools">
+            <button id="toggle-guide" class="button secondary tool-button" type="button" aria-pressed="false"><svg class="icon"><use href="#i-image"/></svg><span>Образец</span></button>
+            <button id="toggle-edges" class="button secondary tool-button" type="button" aria-pressed="false"><svg class="icon"><use href="#i-edges"/></svg><span>Только края</span></button>
+            <button id="shuffle" class="button secondary tool-button" type="button" title="Разложить оставшиеся детали заново"><svg class="icon"><use href="#i-shuffle"/></svg><span>Перемешать</span></button>
+          </div>
+          <div class="game-tools">
+            <div class="zoom-tools" role="group" aria-label="Масштаб игрового поля">
+              <button id="zoom-out" type="button" aria-label="Отдалить" title="Отдалить"><svg class="icon"><use href="#i-minus"/></svg></button>
+              <button id="zoom-reset" type="button" aria-label="Сбросить масштаб" title="Сбросить масштаб">100%</button>
+              <button id="zoom-in" type="button" aria-label="Приблизить" title="Приблизить"><svg class="icon"><use href="#i-plus"/></svg></button>
+            </div>
+            <button id="toggle-sound" class="button secondary tool-button" type="button" aria-pressed="true"><svg class="icon"><use href="#i-sound"/></svg><span>Звук</span></button>
+          </div>
         </div>
         <div class="workspace">
-          <canvas id="board" tabindex="0" aria-label="Игровое поле" aria-describedby="game-help"></canvas>
+          <canvas id="board" tabindex="0" aria-label="Игровое поле" aria-describedby="game-help game-keys"></canvas>
           <div id="finish-panel" class="finish-panel" hidden>
             <span class="finish-mark"><svg class="icon"><use href="#i-check"/></svg></span>
             <h2 id="finish-title" tabindex="-1">Пазл собран!</h2>
@@ -138,15 +152,9 @@
             </div>
           </div>
         </div>
-        <div class="tray-header">
-          <h2>Детали</h2>
-          <div class="tray-controls">
-            <button id="tray-prev" class="icon-button previous" type="button" aria-label="Предыдущие детали"><svg class="icon"><use href="#i-chevron"/></svg></button>
-            <button id="tray-next" class="icon-button" type="button" aria-label="Следующие детали"><svg class="icon"><use href="#i-chevron"/></svg></button>
-          </div>
-        </div>
-        <div id="tray" class="tray" aria-label="Несобранные детали"></div>
-        <p id="game-help" class="game-help">Перетащите деталь на поле или выберите её, затем укажите место. На клавиатуре используйте стрелки и Enter.</p>
+        <p id="game-help" class="game-help">Перетащите деталь к рамке. Чтобы сдвинуть поле при увеличении, потяните за свободное место.</p>
+        <p id="game-keys" class="visually-hidden">Page Up и Page Down выбирают деталь. Стрелки перемещают курсор по рамке. Enter ставит деталь.</p>
+        <p id="game-feedback" class="visually-hidden" aria-live="polite"></p>
         <p id="game-error" class="error game-error" role="alert" hidden></p>
       </div>
     </section>

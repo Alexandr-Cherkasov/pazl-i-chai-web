@@ -281,12 +281,11 @@ async function openGame(current, version) {
   const image = await loadImage(current.playable);
   if (version !== routeVersion) return;
   puzzleBoard?.destroy();
-  $('board').classList.remove('is-selected');
   $('finish-panel').hidden = true;
   $('game-title').textContent = current.name;
   const level = levels[current.level];
   $('game-level').textContent = level.label + ' · ' + level.count + (level.count === 192 ? ' детали' : ' деталей');
-  $('game-help').textContent = 'Перетащите деталь на поле или выберите её, затем укажите место. На клавиатуре используйте стрелки и Enter.';
+  $('game-feedback').textContent = '';
   game = current;
   puzzleBoard = new PuzzleBoard(current, image, onBoardChange);
   puzzleBoard.resize();
